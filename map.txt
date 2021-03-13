@@ -1,7 +1,7 @@
 main loop
 *username will be available
-get new random word
-print the blanks equal to the size of word to guess
+*get new random word
+*print the blanks equal to the size of word to guess
 start loop and get user inputs
 if user inputs are correct put them in the blanks
 if not then continue to next iteration

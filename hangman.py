@@ -1,4 +1,5 @@
 # IMPORTS
+import random
 from wordlist import DATA  # importing 100 random unique meaningful words
 
 # -------------------------------------------
@@ -32,16 +33,48 @@ def getUserName():                          # get the user name
 
 
 def getRandomWord():  # function to get new random word
-    return "Dummy"
+    randomWord = DATA[random.randint(1, 99)]
+    print(randomWord)
+    return randomWord
 
+
+def getUserGuess():  # get the guess letter by user
+    userInput = input("GUESS THE LETTER: ")
+    return userInput
+
+def checkTheGuess(guess, word, alreadyGuessed):
+    if guess[0] in word:
+        index = word.find(guess[0])
+        indexedWord = alreadyGuessed[index]
+        alreadyGuessed.replace(indexedWord, guess)
+        return alreadyGuessed
+    else:
+        alreadyGuessed
+
+def checkIfWin(alreadyGuessed, word):
+    if alreadyGuessed == word:
+        return True
+    else:
+        False
 
 def mainLoop():  # main loop of program, runs out on zero turns
-    turns = 10
     # default turn count is 10
-    newRandomWord = getRandomWord()
-
+    turns = 10
+    newRandomWord = getRandomWord() # newly generated random word
+    userGuessedWord = "_ " * len(newRandomWord)  # user guessed word will be updated upon correct guess of user
     while turns != 0:
         turns -= 1  # on every iteration decrease a turn
+        userGuess = getUserGuess().lower()
+        userGuessedWord = checkTheGuess(userGuess, newRandomWord, userGuessedWord)
+        if checkIfWin(userGuessedWord, newRandomWord):
+            print("YOU WIN")
+            break
+        elif turns >= 1:
+            return  #doNothingContinue
+        else:
+            print("YOU LOSE")
+            break
+        
 
 
 def start():  # main starter of the program
@@ -53,5 +86,6 @@ def start():  # main starter of the program
 
 # GLOBALLY CALLED FUNCTIONS
 start()
+
 
 # -------------------------------------------
