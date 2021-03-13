@@ -1,7 +1,11 @@
-> collect user name
-> set the turns to 10 and show nothing
-> start the process of guessing the word
-> if entered letter matches theany letter in the word
-it will complete an empty space in that unknown word.
-> with the gueeing going on a turn will be subtracted at each guess
-> if the word is guessed then goal is acheived if not the failed.
+main loop
+*username will be available
+get new random word
+print the blanks equal to the size of word to guess
+start loop and get user inputs
+if user inputs are correct put them in the blanks
+if not then continue to next iteration
+when turns are equal to zero
+    if user has guessed the word than he will
+    else user will lose
+The End
