@@ -26,65 +26,100 @@ def getUserName():                          # get the user name
     else:
         return "Guest"
 
-# get the left turns and minus one from them
-# def decreaseTheTurn(turnsDecrease):
-#     turnsDecrease -= 1
-#     return turnsDecrease
-
 
 def getRandomWord():  # function to get new random word
     randomWord = DATA[random.randint(1, 99)]
-    print(randomWord)
-    return randomWord
+    return randomWord.lower()
 
 
 def getUserGuess():  # get the guess letter by user
     userInput = input("GUESS THE LETTER: ")
-    return userInput
+
+    if userInput.lower() == "quit()" or userInput.lower() == "q()":
+        quit()
+    elif(len(userInput) == 1):
+        return userInput.lower()
+    elif userInput == "" or len(userInput) != 1:
+        print(f"YOUR INPUT \"{userInput}\" IS NOT VALID")
+        return "invalid"
+    else:
+        return "invalid"
+
 
 def checkTheGuess(guess, word, alreadyGuessed):
-    if guess[0] in word:
-        index = word.find(guess[0])
-        indexedWord = alreadyGuessed[index]
-        alreadyGuessed.replace(indexedWord, guess)
-        return alreadyGuessed
-    else:
-        alreadyGuessed
+    for l in alreadyGuessed:
+        char = l[0]
+        if guess == char:
+            alreadyGuessed[l] = guess
+    return alreadyGuessed
 
-def checkIfWin(alreadyGuessed, word):
-    if alreadyGuessed == word:
-        return True
+
+def getListFromWord(word):
+    listFromWord = {}
+    i = 0
+
+    for a in word:
+        i += 1
+        id = a+f"{i}"
+        listFromWord[id] = "_ "
+    return listFromWord
+
+
+def arrayToString(array):
+    stringFormed = ""
+
+    for char in array:
+        stringFormed += array[char]
+    return stringFormed
+
+
+def getTurns(word):
+    size = len(word)
+    if size <= 10:
+        return 12
     else:
-        False
+        return size*(int(size/2))
+
 
 def mainLoop():  # main loop of program, runs out on zero turns
-    # default turn count is 10
-    turns = 10
-    newRandomWord = getRandomWord() # newly generated random word
-    userGuessedWord = "_ " * len(newRandomWord)  # user guessed word will be updated upon correct guess of user
+    newRandomWord = getRandomWord()  # newly generated random word
+    guessedWordInMemory = getListFromWord(newRandomWord)  # var to put correct user guesses
+    guessedWordString = arrayToString(guessedWordInMemory)
+    turns = getTurns(newRandomWord)  # default turn count is 10
+    print(line)
+
     while turns != 0:
         turns -= 1  # on every iteration decrease a turn
-        userGuess = getUserGuess().lower()
-        userGuessedWord = checkTheGuess(userGuess, newRandomWord, userGuessedWord)
-        if checkIfWin(userGuessedWord, newRandomWord):
-            print("YOU WIN")
+        print(f"TURNS LEFT: {turns}")
+        Guess = getUserGuess()
+
+        if Guess != "invalid" and len(Guess) == 1:
+            guessedWordInMemory = checkTheGuess(
+                Guess, newRandomWord, guessedWordInMemory)
+            guessedWordString = arrayToString(guessedWordInMemory)
+
+        print(f"GUESSED: {guessedWordString}")
+
+        if guessedWordString == newRandomWord:
+            print("YOU WIN :)")
             break
-        elif turns >= 1:
-            return  #doNothingContinue
-        else:
-            print("YOU LOSE")
-            break
-        
+        elif turns == 0:
+            print("YOU LOSE, THE WORD WAS ", newRandomWord)
+            user_input = input("PLAY AGAIN [y/n]")
+            if user_input.lower() == "y":
+                start()
+            else:
+                break
+        print(line)
 
 
 def start():  # main starter of the program
-    welcome()
     mainLoop()
 
 # -------------------------------------------
 
-
-# GLOBALLY CALLED FUNCTIONS
+ GLOBALLY CALLED FUNCTIONS
+welcome()
 start()
 
 
