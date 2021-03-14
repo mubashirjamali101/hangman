@@ -118,7 +118,7 @@ def start():  # main starter of the program
 
 # -------------------------------------------
 
- GLOBALLY CALLED FUNCTIONS
+#GLOBALLY CALLED FUNCTIONS
 welcome()
 start()
 
