@@ -102,7 +102,11 @@ def mainLoop():  # main loop of program, runs out on zero turns
 
         if guessedWordString == newRandomWord:
             print("YOU WIN :)")
-            break
+            user_input = input("PLAY AGAIN [y/n]")
+            if user_input.lower() == "y":
+                start()
+            else:
+                break
         elif turns == 0:
             print("YOU LOSE, THE WORD WAS ", newRandomWord)
             user_input = input("PLAY AGAIN [y/n]")
