@@ -15,8 +15,8 @@ randomWordList = []
 
 def welcome():  # Initial intro and few basic function
     username = getUserName()
-    print(f"| WELCOME {username.upper()} TO GUESS THE WORD |")
-    print(f"{line}", "\nENTER quit() OR q() TO EXIT", f"\n{line}")
+    print(f"Welcome {username.upper()} to guess the word |")
+    print("\nenter quit() or q() to exit")
 
 
 def getUserName():                          # get the user name
@@ -75,10 +75,10 @@ def arrayToString(array):
 
 def getTurns(word):
     size = len(word)
-    if size <= 10:
-        return 12
+    if size <= 6:
+        return size + 6
     else:
-        return size*(int(size/2))
+        return size + int(size/2)
 
 
 def mainLoop():  # main loop of program, runs out on zero turns
